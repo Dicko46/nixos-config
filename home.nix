@@ -8,6 +8,14 @@ in
 
   home.packages = with pkgs; [
     vscode
+    ayugram-desktop
+    
+    (pkgs.python3.withPackages (ps: with ps; [
+      pandas
+      requests
+      numpy
+      matplotlib
+    ]))
   ];
 
   # Contoh settingan config tradisional

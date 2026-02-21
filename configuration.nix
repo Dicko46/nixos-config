@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 
 {
   imports =
@@ -30,8 +30,12 @@
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.supportedFilesystems = [ "ntfs" ];
 
   networking.hostName = "hype7x8"; # Define your hostname.
+  networking.firewall.enable = false; # Mematikan firewall agar vpn tidak diblokir
+  boot.kernelModules = [ "tun" ]; # Enable Tun for vpn services
+  networking.networkmanager.wifi.powersave = false; # disable wifi power save
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -109,8 +113,15 @@
     ];
   };
 
+  environment.pathsToLink = [
+    "share/thumbnailers"
+  ];
+
   # Install firefox.
   programs.firefox.enable = true;
+
+  programs.gamemode.enable = true;
+
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -126,6 +137,23 @@
     curl
     mpv
     kitty
+    bat
+    fastfetch
+    ffmpeg-headless
+    ffmpegthumbnailer
+    gdk-pixbuf
+     # For general HEIF container support (this includes the AVIF file format) 
+    pkgs.libheif.bin # provides heif-thumbnailer (the program that generates HEIF thumbnails)
+    pkgs.libheif.out # provides heif.thumbnailer (allows for the viewing of HEIF thumbnails
+    # For more newer AVIF specific support usually not needed if libheif is installed
+    pkgs.libavif
+    # For JXL(JPEG XL) support
+    pkgs.libjxl
+    # For WebP support
+    pkgs.webp-pixbuf-loader
+    kdePackages.kdegraphics-thumbnailers # Untuk gambar
+    kdePackages.ffmpegthumbs             # <--- Gunakan ini untuk video di KDE 6
+    kdePackages.taglib
 
     # Graphics
     libva-utils
@@ -138,24 +166,40 @@
     ffmpeg-full
 
     # Modules
-    zsh
+    # zsh
+    # oh-my-zsh
     mihomo
     pciutils
     usbutils
+    gamemode
+    # Video/Audio data composition framework tools like "gst-inspect", "gst-launch" ...
+    gst_all_1.gstreamer
+    # Common plugins like "filesrc" to combine within e.g. gst-launch
+    gst_all_1.gst-plugins-base
+    # Specialized plugins separated by quality
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    # Plugins to reuse ffmpeg to play almost every video format
+    gst_all_1.gst-libav
+    # Support the Video Audio (Hardware) Acceleration API
+    gst_all_1.gst-vaapi
     #iw
     #wirelesstools
     #inetutils
     speedtest-cli
     smartmontools
-    #ntfs3g
-    #exfatprogs
-    #unrar
-    #unzip
+    ntfs3g
+    exfatprogs
+    unrar
+    unzip
     #steam-run
     #desktop-file-utils
+    pkgs-unstable.wine
 
   ];
 
+  services.tumbler.enable = true;
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -167,7 +211,17 @@
    programs.git = {
      enable = true;
    };
-
+   programs.zsh = {
+    enable = true;
+    ohMyZsh = {
+      enable = true;
+      plugins = [
+        "git"
+        "z"
+      ];
+      theme = "robbyrussell";
+    };
+  };
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
