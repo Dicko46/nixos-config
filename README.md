@@ -23,6 +23,7 @@ Repositori ini berisi konfigurasi sistem NixOS saya yang bersifat deklaratif dan
 | configuration.nix | : Konfigurasi sistem global (bootloader, hardware, networking, system packages). |
 | home.nix | : Konfigurasi spesifik user diecko (VS Code, Python environment, XDG User Dirs). |        
 | hardware-configuration.nix | : Hasil scan hardware otomatis (file systems, kernel modules). |
+| :----: | :--- |
                               
 🛠️ Detail Teknis
 
