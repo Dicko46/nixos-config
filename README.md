@@ -17,13 +17,12 @@ Repositori ini berisi konfigurasi sistem NixOS saya yang bersifat deklaratif dan
     Repository Tools: Integrasi dengan NUR (Nix User Repository) untuk paket-paket komunitas seperti xdman.
 
 📂 Struktur Repositori
-| File | Deskripsi |
-| :----: | :----:
+| <center>File</center> | <center>Deskripsi</center> |
+| :----: | :----
 | flake.nix | : Entry point utama, mendefinisikan input (nixpkgs, home-manager, NUR). |
 | configuration.nix | : Konfigurasi sistem global (bootloader, hardware, networking, system packages). |
 | home.nix | : Konfigurasi spesifik user diecko (VS Code, Python environment, XDG User Dirs). |        
 | hardware-configuration.nix | : Hasil scan hardware otomatis (file systems, kernel modules). |
-| :----: | :--- |
                               
 🛠️ Detail Teknis
 
