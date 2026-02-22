@@ -18,7 +18,7 @@ Repositori ini berisi konfigurasi sistem NixOS saya yang bersifat deklaratif dan
 
 📂 Struktur Repositori
 | <center>File</center> | <center>Deskripsi</center> |
-| :----: | :----
+| :----: | :---- |
 | flake.nix | : Entry point utama, mendefinisikan input (nixpkgs, home-manager, NUR). |
 | configuration.nix | : Konfigurasi sistem global (bootloader, hardware, networking, system packages). |
 | home.nix | : Konfigurasi spesifik user diecko (VS Code, Python environment, XDG User Dirs). |        
