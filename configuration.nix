@@ -13,9 +13,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-   # Enable Optimization (deduplication)
-  nix.settings.auto-optimise-store = true;
+  nix.settings.auto-optimise-store = true; # Enable Optimization (deduplication)
 
   # fix initramfs phase boot
   hardware.amdgpu.initrd.enable = true;
@@ -99,12 +97,12 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Enable Flatpak support
   services.flatpak.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.diecko = {
     isNormalUser = true;
+    shell = pkgs.zsh;
     description = "Dicko Rahmansyah";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
@@ -115,16 +113,15 @@
 
   environment.pathsToLink = [
     "share/thumbnailers"
+    "share/applications"
   ];
 
-  # Install firefox.
   programs.firefox.enable = true;
-
   programs.gamemode.enable = true;
 
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+ #nixpkgs.config.allowUnfree = true;
 
   documentation.man.enable = true; # Enable man pages
   documentation.man.generateCaches = true; # Menghasilkan cache manual page
@@ -132,69 +129,24 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    curl
-    mpv
-    kitty
-    bat
-    fastfetch
-    ffmpeg-headless
-    ffmpegthumbnailer
-    gdk-pixbuf
-     # For general HEIF container support (this includes the AVIF file format) 
-    pkgs.libheif.bin # provides heif-thumbnailer (the program that generates HEIF thumbnails)
-    pkgs.libheif.out # provides heif.thumbnailer (allows for the viewing of HEIF thumbnails
-    # For more newer AVIF specific support usually not needed if libheif is installed
-    pkgs.libavif
-    # For JXL(JPEG XL) support
-    pkgs.libjxl
-    # For WebP support
-    pkgs.webp-pixbuf-loader
-    kdePackages.kdegraphics-thumbnailers # Untuk gambar
-    kdePackages.ffmpegthumbs             # <--- Gunakan ini untuk video di KDE 6
-    kdePackages.taglib
+    micro vim wget curl mpv kitty bat fastfetch ffmpeg-headless ffmpegthumbnailer gdk-pixbuf freetype libxml2 gnutls mesa steam-run
+    
+    # Thumbnails
+    libheif.bin libheif.out libavif libjxl webp-pixbuf-loader
 
     # Graphics
-    libva-utils
-    vulkan-loader
-    vulkan-tools # vulkaninfo
+    libva-utils vulkan-loader vulkan-tools 
 
     # Tools
-    micro
-    kdePackages.partitionmanager
-    ffmpeg-full
+    kdePackages.partitionmanager ffmpeg-full
 
     # Modules
-    # zsh
-    # oh-my-zsh
-    mihomo
-    pciutils
-    usbutils
-    gamemode
-    # Video/Audio data composition framework tools like "gst-inspect", "gst-launch" ...
-    gst_all_1.gstreamer
-    # Common plugins like "filesrc" to combine within e.g. gst-launch
-    gst_all_1.gst-plugins-base
-    # Specialized plugins separated by quality
-    gst_all_1.gst-plugins-good
-    gst_all_1.gst-plugins-bad
-    gst_all_1.gst-plugins-ugly
-    # Plugins to reuse ffmpeg to play almost every video format
-    gst_all_1.gst-libav
-    # Support the Video Audio (Hardware) Acceleration API
-    gst_all_1.gst-vaapi
-    #iw
-    #wirelesstools
-    #inetutils
-    speedtest-cli
-    smartmontools
-    ntfs3g
-    exfatprogs
-    unrar
-    unzip
-    #steam-run
-    #desktop-file-utils
+    mihomo pciutils usbutils gamemode iw inetutils speedtest-cli smartmontools ntfs3g exfatprogs unrar unzip
+
+    # GStreamer
+    gst_all_1.gstreamer gst_all_1.gst-plugins-base gst_all_1.gst-plugins-good gst_all_1.gst-plugins-bad gst_all_1.gst-plugins-ugly gst_all_1.gst-libav gst_all_1.gst-vaapi
+    
+    # Unstable package
     pkgs-unstable.wine
 
   ];
@@ -216,7 +168,6 @@
     ohMyZsh = {
       enable = true;
       plugins = [
-        "git"
         "z"
       ];
       theme = "robbyrussell";

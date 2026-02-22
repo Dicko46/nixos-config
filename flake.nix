@@ -16,9 +16,19 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nur, ... }@inputs:
     let
       system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        # Bagian ini HARUS ada di sini agar VS Code dan paket unfree lainnya bisa jalan
+        config = {
+          allowUnfree = true;
+          # Jika Anda butuh paket tertentu dari NUR yang butuh izin khusus:
+          allowUnfreePredicate = (_: true); 
+        };
+        overlays = [ nur.overlays.default ]; 
+      };
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
@@ -28,6 +38,9 @@
       specialArgs = { inherit inputs pkgs-unstable; };
       modules = [
         ./configuration.nix
+        {
+          nixpkgs.pkgs = pkgs; # Menugaskan variabel pkgs kita ke sistem
+        }
  
         # Integrasi Home Manager sebagai Modul
         home-manager.nixosModules.home-manager
