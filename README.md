@@ -16,6 +16,35 @@ Repositori ini berisi konfigurasi sistem NixOS saya yang bersifat deklaratif dan
 
     Repository Tools: Integrasi dengan NUR (Nix User Repository) untuk paket-paket komunitas seperti xdman.
 
+🧩 Advanced Package Management
+
+Konfigurasi ini menggunakan pendekatan hybrid untuk memastikan stabilitas sistem sekaligus mendapatkan akses ke perangkat lunak terbaru:
+🧪 Unstable & Special Packages
+
+Untuk aplikasi yang membutuhkan fitur paling mutakhir, sistem ini menarik paket langsung dari cabang nixpkgs-unstable:
+
+    Wine: Menggunakan versi unstable untuk kompatibilitas aplikasi Windows yang lebih baik.
+
+    Kvantum & Heroic: Diambil dari unstable guna mendapatkan perbaikan bug terbaru pada interface KDE.
+
+    Gaming Tools: Dilengkapi dengan gamemode, gamescope, dan mangohud untuk performa maksimal.
+
+🏗️ NUR (Nix User Repository)
+
+Integrasi dengan NUR memungkinkan instalasi paket komunitas yang tidak tersedia di repositori resmi:
+
+    XDMAN: Terintegrasi melalui repositori lonerOrz lengkap dengan desktop entry kustom.
+
+    Overlay Support: Konfigurasi flake.nix sudah menyertakan overlay NUR agar dapat diakses dengan mudah di seluruh sistem.
+
+🐍 Python Environment
+
+Konfigurasi ini menyertakan environment Python yang dideklarasikan secara eksplisit dengan pustaka analisis data:
+
+    Libraries: Sudah terinstall pandas, requests, numpy, dan matplotlib.
+
+    Declarative: Semua dependensi Python dikelola langsung oleh Home Manager, memastikan lingkungan kerja selalu identik.
+
 📂 Struktur Repositori
 | File | Deskripsi |
 | :----: | :----: |
@@ -54,12 +83,12 @@ Repositori ini berisi konfigurasi sistem NixOS saya yang bersifat deklaratif dan
 
 📦 Aplikasi yang Disertakan
 
-    Development: VS Code, Micro, Vim, Python 3 (Pandas, Requests, Matplotlib).
+  -  Development: VS Code, Micro, Vim, Python 3 (Pandas, Requests, Matplotlib).
 
-    Multimedia: MPV, VLC, FFMPEG, GStreamer plugins.
+  -  Multimedia: MPV, VLC, FFMPEG, GStreamer plugins.
 
-    Social: AyuGram Desktop (Telegram client).
+  -  Social: AyuGram Desktop (Telegram client).
 
-    Tools: Fastfetch, Kitty, Bat, Partition Manager, Xtreme Download Manager.
+  -  Tools: Fastfetch, Kitty, Bat, Partition Manager, Xtreme Download Manager.
 
 Dibuat oleh Dicko Rahmansyah
