@@ -7,7 +7,7 @@ in
   home.homeDirectory = "/home/diecko"; # Ganti ini
 
   home.packages = with pkgs; [
-    vscode ayugram-desktop vlc ocs-url
+    vscode ayugram-desktop vlc ocs-url libreoffice-qt-fresh
     pkgs-unstable.kdePackages.qtstyleplugin-kvantum heroic
     # NUR
     pkgs.nur.repos.lonerOrz.xdman7
@@ -16,6 +16,25 @@ in
       pandas requests numpy matplotlib
     ]))
   ];
+
+  programs.mpv = {
+    enable = true;
+    config = {
+      volume = 70; # Set volume awal 30%
+      volume-max = 100;
+      save-position-on-quit = true;
+      profile = "gpu-hq";
+      vo = "gpu-next";
+      gpu-api = "vulkan";
+      hwdec = "auto-safe";
+      screenshot-format = "png";
+      screenshot-directory = "~/Pictures/Screenshots";
+      sub-auto = "fuzzy";
+      sl = "id";
+      sub-codepage = "sjis";
+    };
+  };
+
 
   xdg.userDirs = {
   enable = true;

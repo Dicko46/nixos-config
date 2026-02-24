@@ -15,6 +15,11 @@
   boot.loader.efi.canTouchEfiVariables = true;
   nix.settings.auto-optimise-store = true; # Enable Optimization (deduplication)
 
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
   # fix initramfs phase boot
   hardware.amdgpu.initrd.enable = true;
 
@@ -129,16 +134,16 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    micro vim wget curl mpv kitty bat fastfetch ffmpeg-headless ffmpegthumbnailer gdk-pixbuf freetype libxml2 gnutls mesa steam-run gamemode gamescope goverlay vkbasalt mangohud
+    micro vim wget curl kitty bat fastfetch gdk-pixbuf freetype libxml2 gnutls mesa steam-run gamemode gamescope goverlay vkbasalt mangohud protonup-qt protontricks
     
     # Thumbnails
-    libheif.bin libheif.out libavif libjxl webp-pixbuf-loader
+    libheif.bin libheif.out libavif libjxl webp-pixbuf-loader ffmpegthumbnailer
 
     # Graphics
     libva-utils vulkan-loader vulkan-tools 
 
     # Tools
-    kdePackages.partitionmanager ffmpeg-full
+    kdePackages.partitionmanager ffmpeg-full kdePackages.kio-extras kdePackages.ffmpegthumbs
 
     # Modules
     mihomo pciutils usbutils gamemode iw inetutils speedtest-cli smartmontools ntfs3g exfatprogs unrar unzip
@@ -147,7 +152,7 @@
     gst_all_1.gstreamer gst_all_1.gst-plugins-base gst_all_1.gst-plugins-good gst_all_1.gst-plugins-bad gst_all_1.gst-plugins-ugly gst_all_1.gst-libav gst_all_1.gst-vaapi
     
     # Unstable package
-    pkgs-unstable.wine
+    pkgs-unstable.wine pkgs-unstable.faugus-launcher
 
   ];
 
