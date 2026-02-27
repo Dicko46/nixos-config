@@ -8,7 +8,7 @@ in
 
   home.packages = with pkgs; [
     vscode ayugram-desktop vlc ocs-url libreoffice-qt-fresh
-    pkgs-unstable.kdePackages.qtstyleplugin-kvantum heroic
+    pkgs-unstable.kdePackages.qtstyleplugin-kvantum heroic nautilus subtitleedit
     # NUR
     pkgs.nur.repos.lonerOrz.xdman7
 

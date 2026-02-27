@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, pkgs-unstable, ... }:
+{ config, pkgs, pkgs-unstable, lib, ... }:
 
 {
   imports =
@@ -37,7 +37,7 @@
 
   networking.hostName = "hype7x8"; # Define your hostname.
   networking.firewall.enable = false; # Mematikan firewall agar vpn tidak diblokir
-  boot.kernelModules = [ "tun" ]; # Enable Tun for vpn services
+  # boot.kernelModules = [ "tun" ]; # Enable Tun for vpn services
   networking.networkmanager.wifi.powersave = false; # disable wifi power save
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -124,6 +124,11 @@
   programs.firefox.enable = true;
   programs.gamemode.enable = true;
 
+  services.mihomo = {
+    enable = true;
+    tunMode = true;
+    configFile = "/etc/mihomo/config.yaml";
+  };
 
   # Allow unfree packages
  #nixpkgs.config.allowUnfree = true;
@@ -134,7 +139,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    micro vim wget curl kitty bat fastfetch gdk-pixbuf freetype libxml2 gnutls mesa steam-run gamemode gamescope goverlay vkbasalt mangohud protonup-qt protontricks
+    micro vim wget curl kitty bat fastfetch gdk-pixbuf freetype libxml2 gnutls mesa steam-run gamemode gamescope goverlay vkbasalt mangohud protonup-qt protontricks gnome-tweaks
     
     # Thumbnails
     libheif.bin libheif.out libavif libjxl webp-pixbuf-loader ffmpegthumbnailer
