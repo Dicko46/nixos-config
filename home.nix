@@ -7,10 +7,10 @@ in
   home.homeDirectory = "/home/diecko"; # Ganti ini
 
   home.packages = with pkgs; [
-    vscode ayugram-desktop vlc ocs-url libreoffice-qt-fresh
-    pkgs-unstable.kdePackages.qtstyleplugin-kvantum heroic nautilus subtitleedit
+    vscode ayugram-desktop vlc ocs-url heroic nautilus subtitleedit
+    pkgs-unstable.kdePackages.qtstyleplugin-kvantum 
     # NUR
-    pkgs.nur.repos.lonerOrz.xdman7
+    # pkgs.nur.repos.lonerOrz.xdman7 
 
     (pkgs.python3.withPackages (ps: with ps; [
       pandas requests numpy matplotlib
@@ -21,7 +21,7 @@ in
     enable = true;
     config = {
       volume = 70; # Set volume awal 30%
-      volume-max = 100;
+      volume-max = 150;
       save-position-on-quit = true;
       profile = "gpu-hq";
       vo = "gpu-next";
@@ -40,18 +40,6 @@ in
   enable = true;
   createDirectories = true; # Otomatis membuat folder Downloads, Documents, dll.
 };
-
-  xdg.desktopEntries = {
-    xdman = {
-      name = "Xtreme Download Manager";
-      genericName = "Download Manager";
-      exec = "xdman"; # Cukup tulis begini saja
-      icon = "xdman";
-      comment = "Powerfull download accelerator and video downloader";
-      categories = [ "Network" "FileTransfer" ];
-      terminal = false;
-    };
-  };
 
   # Contoh settingan config tradisional
   # home.file.".config/kitty/kitty.conf".text = ''

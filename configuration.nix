@@ -48,6 +48,12 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # Podman Virt
+  virtualisation.podman = {
+  enable = true;
+  dockerCompat = true;
+};
+
   # Set your time zone.
   time.timeZone = "Asia/Kuala_Lumpur";
 
@@ -139,7 +145,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    micro vim wget curl kitty bat fastfetch gdk-pixbuf freetype libxml2 gnutls mesa steam-run gamemode gamescope goverlay vkbasalt mangohud protonup-qt protontricks gnome-tweaks
+    micro vim wget curl kitty bat fastfetch gdk-pixbuf freetype libxml2 gnutls mesa steam-run gamemode gamescope goverlay vkbasalt mangohud distrobox
     
     # Thumbnails
     libheif.bin libheif.out libavif libjxl webp-pixbuf-loader ffmpegthumbnailer
@@ -157,7 +163,7 @@
     gst_all_1.gstreamer gst_all_1.gst-plugins-base gst_all_1.gst-plugins-good gst_all_1.gst-plugins-bad gst_all_1.gst-plugins-ugly gst_all_1.gst-libav gst_all_1.gst-vaapi
     
     # Unstable package
-    pkgs-unstable.wine pkgs-unstable.faugus-launcher
+    pkgs-unstable.wine pkgs-unstable.faugus-launcher pkgs-unstable.czkawka
 
   ];
 
