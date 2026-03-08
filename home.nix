@@ -7,7 +7,7 @@ in
   home.homeDirectory = "/home/diecko"; # Ganti ini
 
   home.packages = with pkgs; [
-    vscode ayugram-desktop vlc ocs-url heroic nautilus subtitleedit
+    vscode telegram-desktop vlc ocs-url heroic nautilus subtitleedit
     pkgs-unstable.kdePackages.qtstyleplugin-kvantum 
     # NUR
     # pkgs.nur.repos.lonerOrz.xdman7 

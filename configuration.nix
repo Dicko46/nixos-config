@@ -145,7 +145,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    micro vim wget curl kitty bat fastfetch gdk-pixbuf freetype libxml2 gnutls mesa steam-run gamemode gamescope goverlay vkbasalt mangohud distrobox
+    micro vim wget curl kitty bat fastfetch gdk-pixbuf freetype libxml2 gnutls mesa steam-run gamemode gamescope goverlay vkbasalt mangohud distrobox nvd
     
     # Thumbnails
     libheif.bin libheif.out libavif libjxl webp-pixbuf-loader ffmpegthumbnailer
