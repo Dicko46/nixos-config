@@ -20,7 +20,7 @@ in
   programs.mpv = {
     enable = true;
     config = {
-      volume = 70; # Set volume awal 30%
+      volume = 80; # Set volume awal 30%
       volume-max = 150;
       save-position-on-quit = true;
       profile = "gpu-hq";

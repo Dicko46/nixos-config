@@ -20,6 +20,10 @@
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
+
+  nix.settings.max-jobs = 2; # Batasi agar tidak semua core bekerja barengan saat compile
+  nix.settings.cores = 4;
+
   # fix initramfs phase boot
   hardware.amdgpu.initrd.enable = true;
 
